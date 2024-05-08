@@ -1,12 +1,21 @@
 import { Link } from "react-router-dom";
+import useAuth from "../hooks/useAuth";
 
 const Login = () => {
-    const handelFrom=(e)=>{
+    const { signIn } = useAuth()
+    const handelFrom = (e) => {
         e.preventDefault()
-        const from=e.target
-        const email=from.email.value
-        const password=from.password.value
-        console.log(name,email,password)
+        const from = e.target
+        const email = from.email.value
+        const password = from.password.value
+
+        console.log( email, password)
+        try {
+            const data = signIn(email, password)
+            console.log(data)
+        } catch (error) {
+            console.log(error)
+        }
     }
     return (
         <div className="w-1/4 mx-auto">
@@ -15,7 +24,7 @@ const Login = () => {
                     <div>
                         <h2 className="text-3xl text-center font-semibold">Login Now!</h2>
                     </div>
-                   
+
                     <div>
                         <input type="email" name="email" placeholder="Enter Your Email" className="border-b-[1px] border-gray-500 p-3 w-full outline-0" />
                     </div>

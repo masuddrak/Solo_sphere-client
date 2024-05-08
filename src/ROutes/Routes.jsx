@@ -5,6 +5,8 @@ import About from "../Pages/About";
 import Contact from "../Pages/Contact";
 import Register from "../components/Register";
 import Login from "../components/Login";
+import JobDetails from "../components/JobDetails";
+import axios from "axios";
 
 const router = createBrowserRouter([
     {
@@ -31,6 +33,11 @@ const router = createBrowserRouter([
           path:"/login",
           element:<Login></Login>
         },
+        {
+          path:"/job/:id",
+          element:<JobDetails></JobDetails>,
+          loader:({params})=>axios(`${import.meta.env.VITE_API_URL}/job/${params.id}`)
+        }
       ]
     },
   ]);

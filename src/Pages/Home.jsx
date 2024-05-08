@@ -1,8 +1,9 @@
+import TabCatagorys from "../components/TabCatagorys";
 
 const Home = () => {
     return (
         <div>
-            this is home
+            <TabCatagorys></TabCatagorys>
         </div>
     );
 };
