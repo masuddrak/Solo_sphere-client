@@ -3,6 +3,8 @@ import Layout from "../Layout/Layout";
 import Home from "../Pages/Home";
 import About from "../Pages/About";
 import Contact from "../Pages/Contact";
+import Register from "../components/Register";
+import Login from "../components/Login";
 
 const router = createBrowserRouter([
     {
@@ -20,7 +22,15 @@ const router = createBrowserRouter([
         {
           path:"/contact",
           element:<Contact></Contact>
-        }
+        },
+        {
+          path:"/register",
+          element:<Register></Register>
+        },
+        {
+          path:"/login",
+          element:<Login></Login>
+        },
       ]
     },
   ]);
