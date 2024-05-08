@@ -47,8 +47,9 @@ const Header = () => {
                                             ? <img src={user?.photoURL}></img> : <IoPersonCircleSharp className="w-full h-full object-cover"></IoPersonCircleSharp>}
                                     </div>
                                 </div>
-                                <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
-                                    <li><a>Settings</a></li>
+                                <ul tabIndex={0} className="menu menu-sm dropdown-content space-y-4 mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
+                                    <Link to="addjob">Add Job</Link>
+                                    <Link to="mypostedjobs">My Posted Jobs</Link>
                                     <li><button onClick={handleLogOut}>Logout</button></li>
                                 </ul>
                             </div>

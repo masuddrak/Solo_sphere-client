@@ -1,21 +1,42 @@
-import { useLoaderData, useParams } from "react-router-dom";
+import { useLoaderData } from "react-router-dom";
 import useAuth from "../hooks/useAuth";
+import DatePicker from "react-datepicker";
 
+import "react-datepicker/dist/react-datepicker.css";
+import { useState } from "react";
+import axios from "axios";
+import toast from "react-hot-toast";
 
 const JobDetails = () => {
-    const {user}=useAuth()
+    const { user } = useAuth()
     const { data } = useLoaderData()
-    const { _id, jobTitle, category, description, minPrice, maxPrice, deadline, employerEmail } = data
-    const handelFrom = (e) => {
+    const [startDate, setStartDate] = useState(new Date());
+    const { _id, job_title,
+        deadline,
+        category,
+        min_price,
+        max_price,
+        description,buyer } = data || {}
+    const handelFrom = async (e) => {
         e.preventDefault()
         const from = e.target
         const email = from.email.value
-        const comment=from.comment.value
-        const price=from.price.value
-        const date=from.date.value
+        const comment = from.comment.value
+        const price = parseInt(from.price.value)
+        if(price<min_price || price>max_price)return toast.error("Up to Add minimum Value")
+        const deadline = startDate
+        const status = "pending"
+        const jobId = _id
 
-        console.log(email,comment,price,date)
 
+        const bidData = { email, comment, price, deadline, status, jobId, job_title, category }
+        console.table(bidData)
+        try {
+            const { data } = await axios.post(`${import.meta.env.VITE_API_URL}/bid`, bidData)
+            console.log(data)
+        } catch (error) {
+            console.log(error)
+        }
     }
     return (
         <div className="grid grid-cols-2 gap-6">
@@ -23,7 +44,7 @@ const JobDetails = () => {
             <div className='w-full  px-4 py-3 bg-white rounded-md shadow-md hover:scale-[1.05] transition-all'>
                 <div className='flex items-center justify-between'>
                     <span className='text-xs font-light text-gray-800 '>
-                        Deadline: {deadline}
+                        Deadline: {new Date(deadline).toLocaleDateString()}
                     </span>
                     <span className='px-3 py-1 text-[8px] text-blue-800 uppercase bg-blue-200 rounded-full '>
                         {category}
@@ -31,20 +52,20 @@ const JobDetails = () => {
                 </div>
                 <div>
                     <h1 className='mt-2 text-lg font-semibold text-gray-800 '>
-                        {jobTitle}
+                        {max_price}
                     </h1>
 
                     <p className='mt-2 text-sm text-gray-600 '>
                         {description}
                     </p>
                     <p className='mt-2 text-sm font-bold text-gray-600 '>
-                        Range: ${minPrice} - ${maxPrice}
+                        Range: ${min_price} - ${min_price}
                     </p>
                 </div>
 
                 <div>
                     <h3 className="text-xl">Authore Info</h3>
-                    <p>Email: {employerEmail}</p>
+                    <p>Email: {buyer?.email}</p>
                 </div>
             </div>
             {/* bid job form */}
@@ -65,7 +86,7 @@ const JobDetails = () => {
                             <input type="text" name="comment" placeholder="Enter Your Comment" required className="border-b-[1px] border-gray-500 p-3 w-full outline-0" />
                         </div>
                         <div>
-                            <input type="date" name="date" placeholder="Enter Your date" required className="border-b-[1px] border-gray-500 p-3 w-full outline-0" />
+                            <DatePicker className="border-b-[1px] border-gray-500 p-3 w-full outline-0" selected={startDate} onChange={(date) => setStartDate(date)} />
                         </div>
                     </div>
 

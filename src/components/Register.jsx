@@ -1,9 +1,11 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import useAuth from "../hooks/useAuth";
+import toast from "react-hot-toast";
 
 const Register = () => {
-    const { createUser } = useAuth()
-    const handelFrom = (e) => {
+    const { createUser,setUser,updateUserProfile } = useAuth()
+    const navigate=useNavigate()
+    const handelFrom = async(e) => {
         e.preventDefault()
         const from = e.target
         const name = from.name.value
@@ -11,8 +13,10 @@ const Register = () => {
         const password = from.password.value
         console.log(name, email, password)
         try {
-            const data = createUser(email, password)
-            console.log(data)
+            const result = createUser(email, password)
+            await updateUserProfile(name)
+            // Optimistic UI Update
+            setUser({ ...result?.user, displayName: name })
         } catch (error) {
             console.log(error)
         }

@@ -22,7 +22,7 @@ const TabCatagorys = () => {
                         <TabList >
                             <Tab>Web Development</Tab>
                             <Tab>Graphics Design</Tab>
-                            <Tab>Social Media Marketing</Tab>
+                            <Tab>Digital Marketing</Tab>
                         </TabList>
                     </div>
                 </div>
@@ -44,7 +44,7 @@ const TabCatagorys = () => {
                 <TabPanel>
                     <div className="grid grid-cols-3 gap-6">
                         {
-                            jobs.filter(j => j.category === "Social Media Marketing").map(job => <JobCard key={job._id} job={job}></JobCard>)
+                            jobs.filter(j => j.category === "Digital Marketing").map(job => <JobCard key={job._id} job={job}></JobCard>)
                         }
                     </div>
                 </TabPanel>
