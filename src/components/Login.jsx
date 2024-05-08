@@ -1,22 +1,25 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import useAuth from "../hooks/useAuth";
 
 const Login = () => {
     const { signIn } = useAuth()
+    const location = useLocation()
+    const naviget = useNavigate()
+    const mylocation = location.state || "/"
     const handelFrom = (e) => {
         e.preventDefault()
         const from = e.target
         const email = from.email.value
         const password = from.password.value
-
-        console.log( email, password)
         try {
             const data = signIn(email, password)
             console.log(data)
+            naviget(mylocation, { replace: true })
         } catch (error) {
             console.log(error)
         }
     }
+
     return (
         <div className="w-1/4 mx-auto">
             <form onSubmit={handelFrom} >

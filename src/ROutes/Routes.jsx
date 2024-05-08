@@ -10,6 +10,7 @@ import axios from "axios";
 import Addjob from "../Pages/Addjob";
 import MypostedJobs from "../Pages/MypostedJobs";
 import UpadteJobs from "../components/UpadteJobs";
+import PrivetRoute from "../Provider/PrivetRoute";
 
 const router = createBrowserRouter([
     {
@@ -47,7 +48,7 @@ const router = createBrowserRouter([
         },
         {
           path:"/mypostedjobs",
-          element:<MypostedJobs></MypostedJobs>,
+          element:<PrivetRoute><MypostedJobs></MypostedJobs></PrivetRoute>,
         },
         {
           path:"/updatejob/:id",
