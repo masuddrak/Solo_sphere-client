@@ -16,7 +16,8 @@ const JobDetails = () => {
         category,
         min_price,
         max_price,
-        description,buyer } = data || {}
+        description,buyer} = data || {}
+   
     const handelFrom = async (e) => {
         e.preventDefault()
         const from = e.target
@@ -29,7 +30,7 @@ const JobDetails = () => {
         const jobId = _id
 
 
-        const bidData = { email, comment, price, deadline, status, jobId, job_title, category }
+        const bidData = { email, comment, price, deadline, status, jobId, job_title, category,buyer}
         console.table(bidData)
         try {
             const { data } = await axios.post(`${import.meta.env.VITE_API_URL}/bid`, bidData)
@@ -59,7 +60,7 @@ const JobDetails = () => {
                         {description}
                     </p>
                     <p className='mt-2 text-sm font-bold text-gray-600 '>
-                        Range: ${min_price} - ${min_price}
+                        Range: ${min_price} - ${max_price}
                     </p>
                 </div>
 

@@ -48,8 +48,10 @@ const Header = () => {
                                     </div>
                                 </div>
                                 <ul tabIndex={0} className="menu menu-sm dropdown-content space-y-4 mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
-                                    <Link to="addjob">Add Job</Link>
-                                    <Link to="mypostedjobs">My Posted Jobs</Link>
+                                    <Link to="/addjob">Add Job</Link>
+                                    <Link to="/mypostedjobs">My Posted Jobs</Link>
+                                    <Link to="/mybids">My Bid Jobs</Link>
+                                    <Link to="/mybidrequest">My Bid Requests</Link>
                                     <li><button onClick={handleLogOut}>Logout</button></li>
                                 </ul>
                             </div>

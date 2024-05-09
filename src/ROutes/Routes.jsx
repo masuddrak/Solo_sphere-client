@@ -11,6 +11,8 @@ import Addjob from "../Pages/Addjob";
 import MypostedJobs from "../Pages/MypostedJobs";
 import UpadteJobs from "../components/UpadteJobs";
 import PrivetRoute from "../Provider/PrivetRoute";
+import MyBids from "../Pages/Mybids";
+import MyBidRequests from "../Pages/MyBidRequests";
 
 const router = createBrowserRouter([
     {
@@ -54,6 +56,14 @@ const router = createBrowserRouter([
           path:"/updatejob/:id",
           element:<UpadteJobs></UpadteJobs>,
           loader:({params})=>axios(`${import.meta.env.VITE_API_URL}/job/${params.id}`)
+        },
+        {
+          path:"/mybids",
+          element:<MyBids></MyBids>,
+        },
+        {
+          path:"/mybidrequest",
+          element:<MyBidRequests></MyBidRequests>,
         },
       ]
     },
